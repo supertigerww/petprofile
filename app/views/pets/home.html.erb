@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+    <%= render "layouts/navigation" %>
+    <div class="wrapper">
+        <div id="columns">
+            <% @pets.each do |pet| %>
+                <figure>
+                    <div class="pet-left">
+                        <a href="/petprofile/pets/<%=pet.id%>">
+                        <img src="<%=pet.image.url%>" alt="petphoto">
+                        </a>
+                    </div>
+                    <figcaption>
+                        Name: <%= pet.name %><br>
+                        Species: <%= pet.species %><br>
+                        Gender: <%= pet.gender %><br>
+                    </figcaption>
+                </figure>
+            <% end %>
+        </div> 
+    </div>
+            
+
+</body>
+</html>

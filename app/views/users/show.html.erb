@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User DashBoard</title>
+</head>
+<body>
+        <%= render "layouts/navigation" %>
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                    <th>Your Pets</th>
+                    <th>Actions</th>
+                </thead>
+                <% @user.pets.each do |pet| %>
+                <tbody>
+                    <td>
+                        <a href="/petprofile/pets/<%=pet.id%>"><h4><%= pet.name %></h4></a>
+                    </td>
+                    <td>
+                        <button class="btn btn-info"><a href="/petprofile/<%=pet.id%>/blog/new">Add a blog</a></button>
+                        
+                    </td>
+                    <td>
+                        <button class="btn btn-danger"><a href="/delete">Remove</a></button>
+                    </td>
+                </tbody>
+                <% end %>
+            </table>   
+        </div>
+</body>
+</html>

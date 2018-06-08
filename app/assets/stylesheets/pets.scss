@@ -1,0 +1,143 @@
+// Place all the styles related to the pets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.addbutton{
+    margin-right:1650px;
+}
+
+.pet{
+    width:200px;
+    display:inline-block;
+    margin:40px;
+}
+
+img{
+    max-width: 200px;
+}
+
+.container{
+    width:300px;
+}
+
+.sidenav{
+  margin-top:50px;
+  background: url(//subtlepatterns.com/patterns/congruent_pentagon.png);
+}
+
+#photo{
+  margin-left:35px;
+}
+
+img.petphoto{
+  width:130%;
+  height:130%;
+}
+
+#maincontent{
+  padding-left:200px;
+}
+
+#detail{
+  border-style: ridge;
+  border-width: 7px;
+  border-color: coral;
+  width:350px;
+  padding:20px;
+}
+
+.commentred{
+  color:red;
+  font-weight: bold;
+}
+
+.wrapper{
+    background-image: url("pet-background-10.jpg");
+    padding:20px;
+
+}
+
+.row.content {height: 1500px}
+    
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+
+    @font-face{font-family:'Calluna';
+        src:url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/callunasansregular-webfont.woff') format('woff');
+       }
+       body {
+           background: url(//subtlepatterns.com/patterns/congruent_pentagon.png);
+         font-family: Calluna, Arial, sans-serif;
+         min-height: 1000px;
+       }
+       #columns {
+           column-width: 320px;
+           column-gap: 15px;
+         width: 90%;
+           max-width: 1100px;
+           margin: 50px auto;
+       }
+       
+       div#columns figure {
+           background: #fefefe;
+           border: 2px solid #fcfcfc;
+           box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+           margin: 0 2px 15px;
+           padding: 15px;
+           padding-bottom: 10px;
+           transition: opacity .4s ease-in-out;
+         display: inline-block;
+         column-break-inside: avoid;
+       }
+       
+       div#columns figure img {
+           width: 100%; height: auto;
+           border-bottom: 1px solid #ccc;
+           padding-bottom: 15px;
+           margin-bottom: 5px;
+       }
+       
+       div#columns figure figcaption {
+         font-size: 20px;
+           color: #444;
+         line-height: 1.5;
+       }
+       
+       div#columns small { 
+         font-size: 1rem;
+         float: right; 
+         text-transform: uppercase;
+         color: #aaa;
+       } 
+       
+       div#columns small a { 
+         color: #666; 
+         text-decoration: none; 
+         transition: .4s color;
+       }
+       
+       div#columns:hover figure:not(:hover) {
+           opacity: 0.4;
+       }
+       
+       @media screen and (max-width: 750px) { 
+         #columns { column-gap: 0px; }
+         #columns figure { width: 100%; }
+       }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add favorite food</title>
+</head>
+<style>
+    h2 {
+        font-family: "Comic Sans MS", "Comic Sans";
+    }
+</style>
+<body>
+    
+        <div class="container">
+            <h2>Would you like to tell us your pet's favourite food?</h2>
+                <%= form_for @food, html: { multipart: true } do |f| %>
+                <% if flash[:errors] %>
+                    <div id="error_explanation">
+                    <ul>
+                        <% flash[:errors].each do |msg| %>
+                        <li>
+                            <%= msg %>
+                        </li>
+                        <% end %>
+                    </ul>
+                    </div>
+                <% end %>
+            
+                <div class="form-group">
+                    <%= f.label :name %>
+                    <%= f.text_field :name, class: 'form-control' %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :ProductLink %>
+                    <%= f.text_field :link , class:'form-control' %>
+                </div>
+        
+                <div class="form-group">
+                    <%= f.label :Photo %>
+                    <%= f.file_field :image, class: 'form-control' %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :description %><br>
+                    <%= f.text_area(:description, size: '160x7') %>
+                </div>
+
+                <%= f.hidden_field :petid, 'name' => "pet_id", :value => params[:petid] %>
+
+                <div class="form-group">
+                    <%= f.submit 'Add', class: 'btn btn-default' %>
+                </div>
+                <a href="/petprofile/home">Not now~~~</a>
+                <% end %>
+</body>
+</html>

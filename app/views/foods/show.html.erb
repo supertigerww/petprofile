@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Food Detail</title>
+</head>
+<style>
+  h1{
+    font-family: "Comic Sans MS", "Comic Sans"
+  }
+
+  #photo{
+    margin-top:100px;
+  }
+</style>
+<body>
+    <%= render "layouts/navigation" %>
+    <div class="container-fluid">
+              <div id="photo" class="col-sm-2 sidenav">
+                <img src="<%=@food.image.url%>" alt="foodphoto">
+              </div>
+          
+              <div class="col-sm-9">
+                <h1><%=@food.name%></h1>
+                <ul class="nav nav-pills nav-stacked">
+                <li><h3 style="color:black">Uploader Review:<br><br><h4><%=@food.description%></h4> <br><br></h3></li>
+                <li><h3 style="color:black">Product Link:<br><br> <h4><a href="<%=@food.link%>">Click ME!</a></h4></h3></li>
+                </ul><br> 
+                
+                <h4>Leave a Comment:</h4>
+                <form role="form" action="/foodcomments" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                  <div class="form-group">
+                    <textarea name="foodcomment[content]" class="form-control" rows="3" required></textarea>
+                  </div>
+                  <input type="hidden"  name="foodcomment[user_id]" value="<%=session[:user_id]%>">
+                  <input type="hidden"  name="foodcomment[food_id]" value="<%=params[:foodid]%>">
+                  <input type="submit" value="Submit" class="btn btn-success">
+                </form>
+                <br><br>
+
+                <div>
+                    <h3 style="color:black">Other User's Comments:</h3>
+                    <% @food.foodcomments.each do |comment| %>
+                    Posted at <p class="commentred"><%=comment.created_at%></p>
+                    By <p class="commentred"><%= comment.user.first_name %></p>
+                    <h4><%= comment.content %><br><br></h4>
+                    <p>----------------------------------------------------------------------------------</p>
+                    <% end %>
+                </div>
+              </div>
+          
+                
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Toy Detail</title>
+</head>
+<style>
+  h1 {
+    font-family: "Comic Sans MS", "Comic Sans"
+  }
+
+  #photo{
+    margin-top:100px;
+  }
+
+  #all{
+    background-image: url("background.jpg");
+}
+</style>
+<body>
+    <%= render "layouts/navigation" %>
+    <div id="all" class="container-fluid">
+              <div id="photo" class="col-sm-2 sidenav">
+                <img src="<%=@toy.image.url%>" alt="toyphoto">
+              </div>
+          
+              <div class="col-sm-9">
+                <h1><%=@toy.name%></h1>
+                <ul class="nav nav-pills nav-stacked">
+                <li><h3 style="color:black">Uploader Review:<br><br><h4><%=@toy.description%></h4> <br><br></h3></li>
+                <li><h3 style="color:black">Product Link:<br><br> <h4><a href="<%=@toy.link%>">Click ME!</a></h4></h3></li>
+                </ul><br> 
+                
+                <h4>Leave a Comment:</h4>
+                <form role="form" action="/toycomments" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                  <div class="form-group">
+                    <textarea name="toycomment[content]" class="form-control" rows="3" required></textarea>
+                  </div>
+                  <input type="hidden"  name="toycomment[user_id]" value="<%=session[:user_id]%>">
+                  <input type="hidden"  name="toycomment[toy_id]" value="<%=params[:toyid]%>">
+                  <input type="submit" value="Submit" class="btn btn-success">
+                </form>
+                <br><br>
+
+                <div>
+                    <h3 style="color:black">Other User's Comments:</h3>
+                    <% @toy.toycomments.each do |comment| %>
+                    Posted at <p class="commentred"><%=comment.created_at%></p>
+                    By <p class="commentred"><%= comment.user.first_name %></p>
+                    <h4><%= comment.content %><br><br></h4>
+                    <p>----------------------------------------------------------------------------------</p>
+                    <% end %>
+                </div>
+              </div>
+          
+                
+    </div>
+</body>
+</html>

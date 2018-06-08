@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <%= render "layouts/navigation" %>
+    <div class="container-fluid">
+            <div class="row content">
+              <div id="sidenav" class="col-sm-3 sidenav">
+                <div id="photo"><img class="petphoto" src="<%=@pet.image.url%>" alt="petphoto"></div>
+                <h1><%=@pet.name%></h1>
+                <ul id="detail" class="nav nav-pills nav-stacked">
+                  <li><h4>Species: <%=@pet.species%></h4></li><br>
+                  <li><h4>Breed: <%=@pet.breed%></h4></li><br>
+                  <li><h4>Gender: <%=@pet.gender%></h4></li><br>
+                  <li><h4>Birthdate: <%=@pet.birthdate%></h4></li><br>
+                  <% if @pet.food == nil %>
+                  <li><h4>Favorite Food: Not Added Yet</h4></li><br>
+                  <% else %>
+                  <li><h4>Favorite Food:<br><a href="/petprofile/foods/<%=@pet.food.id%>"><%=@pet.food.name%></a></h4></li><br>
+                  <% end %>
+                  <% if @pet.toy == nil %>
+                  <li><h4>Favorite Toy: Not Added Yet</h4></li><br>
+                  <% else %>
+                  <li><h4>Favorite Toy:<br><a href="/petprofile/toys/<%=@pet.toy.id%>"><%=@pet.toy.name%></a></h4></li><br>
+                  <% end %>
+                </ul><br>
+              </div>
+          
+              <div id="maincontent" class="col-sm-9">
+                <% @pet.petposts.each do |post| %>
+                <div>
+                <h2><%=post.title%></h2>
+                <h5><span class="glyphicon glyphicon-time"></span> Post at <%=post.created_at%></h5>
+                <h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5><br>
+                <p><%=post.content%></p><br>
+                <img src="<%=post.image.url%>" alt="postphoto">
+                <br><br>
+                </div>
+                <% end %>
+          
+                <h4>Leave a Comment:</h4>
+                <form action="/petcomments" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                  <div class="form-group">
+                    <textarea name="petcomment[content]"  rows="5" cols="70" required ></textarea>
+                  </div>
+                  <input type="hidden"  name="petcomment[user_id]" value="<%=session[:user_id]%>">
+                  <input type="hidden"  name="petcomment[pet_id]" value="<%=@pet.id%>">
+                  <input type="submit" value="Submit" class="btn btn-success">
+                </form>
+                <br><br>
+
+                <div class="usercomments">
+                    <h3 style="color:black">Messages:</h3>
+                    <% @pet.petcomments.each do |comment| %>
+                    Posted at <p class="commentred"><%=comment.created_at%></p>
+                    By <p class="commentred"><%= comment.user.first_name %></p>
+                    <h4><%= comment.content %><br><br></h4>
+                    <p>----------------------------------------------------------------------------------</p>
+                    <% end %>
+                </div>
+                
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+</body>
+</html>
